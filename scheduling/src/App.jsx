@@ -422,6 +422,24 @@ function App() {
                                           <p className="text-sm text-gray-500">
                                             Preencha abaixo os campos:
                                           </p>
+                                          <div className="my-3">
+                                            <p className="block text-sm font-medium leading-6 text-gray-900 focus:outline-none focus:ring focus:ring-indigo-500">
+                                              Nome:
+                                            </p>
+                                            <input
+                                              type="text"
+                                              name="price"
+                                              id="price"
+                                              className="block w-full rounded-md border-2 border-neutral-300 py-1.5 pl-7 pr-20 text-gray-900  placeholder:text-gray-400 sm:text-sm sm:leading-6  focus:outline-none focus:ring focus:ring-indigo-500"
+                                              placeholder="Mária de fatima"
+                                              onChange={(e) =>
+                                                setFormData({
+                                                  ...formData,
+                                                  name: e.target.value,
+                                                })
+                                              }
+                                            />
+                                          </div>
                                           <Listbox
                                             value={selected}
                                             onChange={setSelected}
@@ -545,16 +563,22 @@ function App() {
                                           </div>
                                         </div>
                                         <div className="mt-2.5">
-                                        <p className="block text-sm font-medium leading-6 text-gray-900 focus:outline-none focus:ring focus:ring-indigo-500">
-                                          Horário:
-                                        </p>
-                                        <input
-                                          type="number"
-                                          name="price"
-                                          id="price"
-                                          className="block w-full rounded-md border-2 border-neutral-300 py-1.5 pl-7 pr-20 text-gray-900  placeholder:text-gray-400 sm:text-sm sm:leading-6  focus:outline-none focus:ring focus:ring-indigo-500"
-                                          placeholder="15:30"
-                                        />
+                                          <p className="block text-sm font-medium leading-6 text-gray-900 focus:outline-none focus:ring focus:ring-indigo-500">
+                                            Horário:
+                                          </p>
+                                          <input
+                                            type="time"
+                                            name="price"
+                                            id="price"
+                                            className="block w-full rounded-md border-2 border-neutral-300 py-1.5 pl-7 pr-20 text-gray-900  placeholder:text-gray-400 sm:text-sm sm:leading-6  focus:outline-none focus:ring focus:ring-indigo-500"
+                                            placeholder="15:30"
+                                            onChange={(e) =>
+                                              setFormData({
+                                                ...formData,
+                                                hour: e.target.value,
+                                              })
+                                            }
+                                          />
                                         </div>
                                       </div>
                                     </div>

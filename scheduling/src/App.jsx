@@ -2,6 +2,7 @@ import "./index.css";
 import * as React from "react";
 import api from "../api/index";
 import moment from "moment";
+import { formatProcess } from "../../Utils/FormatProcess";
 import { Fragment, useRef, useState, useEffect } from "react";
 import {
   Disclosure,
@@ -23,9 +24,46 @@ function App() {
   const [formData, setFormData] = useState({});
   const [users, setUsers] = useState();
   const [open, setOpen] = useState(false);
-
   const cancelButtonRef = useRef(null);
 
+  const Items = [
+    {
+      id: 1,
+      name: "Progressiva",
+      avatar:
+        "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      value: "progressive",
+    },
+    {
+      id: 2,
+      name: "Selagem",
+      avatar:
+        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      value: "sealing",
+    },
+    {
+      id: 3,
+      name: "Corte",
+      avatar:
+        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      value: "cut",
+    },
+    {
+      id: 4,
+      name: "Mechas",
+      avatar:
+        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      value: "locks",
+    },
+    {
+      id: 5,
+      name: "Pintar",
+      avatar:
+        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      value: "paint",
+    },
+  ];
+  const [selected, setSelected] = useState(Items[0]);
   const LoadData = async () => {
     try {
       const resp = await api({
@@ -38,6 +76,35 @@ function App() {
       });
       setUsers(resp?.data);
       console.log({ users });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  const HandleSvheduling = async () => {
+    try {
+      const resp = await api({
+        method: "POST",
+        url: "/create-user",
+        data: {
+          name: formData?.name,
+          email: formData?.email,
+          process: selected?.value,
+          hour: formData?.hour,
+          day: formData?.day,
+          shift: "morning",
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+        json: true,
+      });
+      LoadData();
+      const message = `https://api.whatsapp.com/send?phone=5534996442120&text=Olá! Gostaria de marcar um horário. Meu nome é: *${
+        formData?.name
+      }*,quero fazer: *${formatProcess(selected?.value)?.label}*, as: *${
+        formData?.hour
+      }*, no dia: *${formData?.day}*, telefone: ${formData?.email}!`;
+      window.open(message, "_blank");
     } catch (e) {
       console.error(e);
     }
@@ -60,41 +127,6 @@ function App() {
     { name: "Settings", href: "#" },
     { name: "Sign out", href: "#" },
   ];
-
-  const Items = [
-    {
-      id: 1,
-      name: "Progressiva",
-      avatar:
-        "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      name: "Selagem",
-      avatar:
-        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    {
-      id: 3,
-      name: "Corte",
-      avatar:
-        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    {
-      id: 4,
-      name: "Mechas",
-      avatar:
-        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    {
-      id: 5,
-      name: "Pintar",
-      avatar:
-        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-  ];
-  const [selected, setSelected] = useState(Items[0]);
-
   const people = [
     {
       name: "Leslie Alexander",
@@ -340,7 +372,7 @@ function App() {
             </div>
           </header>
           <main>
-            <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 ">
               <ul role="list" className="divide-y divide-gray-100">
                 {users?.map((person) => (
                   <li
@@ -364,7 +396,7 @@ function App() {
                     </div>
                     <div className="hidden sm:flex sm:flex-col sm:items-end">
                       <p className="text-base leading-6 text-gray-900 font-semibold	">
-                        {person?.process}
+                        {formatProcess(person?.process)?.label.toUpperCase()}
                       </p>
                       <p className="text-base leading-6 text-gray-900 font-semibold	">
                         {person?.day}, ás {person?.hour} da {person?.shift}
@@ -436,6 +468,24 @@ function App() {
                                                 setFormData({
                                                   ...formData,
                                                   name: e.target.value,
+                                                })
+                                              }
+                                            />
+                                          </div>
+                                          <div className="my-3">
+                                            <p className="block text-sm font-medium leading-6 text-gray-900 focus:outline-none focus:ring focus:ring-indigo-500">
+                                              Telefone:
+                                            </p>
+                                            <input
+                                              type="number"
+                                              name="price"
+                                              id="price"
+                                              className="block w-full rounded-md border-2 border-neutral-300 py-1.5 pl-7 pr-20 text-gray-900  placeholder:text-gray-400 sm:text-sm sm:leading-6  focus:outline-none focus:ring focus:ring-indigo-500"
+                                              placeholder="(34) 9 9644-2120"
+                                              onChange={(e) =>
+                                                setFormData({
+                                                  ...formData,
+                                                  email: e.target.value,
                                                 })
                                               }
                                             />
@@ -587,7 +637,7 @@ function App() {
                                     <button
                                       type="button"
                                       className="inline-flex w-full justify-center rounded-md bg-emerald-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                                      onClick={() => setOpen(false)}
+                                      onClick={() => HandleSvheduling()}
                                     >
                                       Agendar
                                     </button>

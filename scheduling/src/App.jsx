@@ -1,4 +1,5 @@
 import "./index.css";
+import * as React from "react";
 import api from "../api/index";
 import moment from "moment";
 import { Fragment, useRef, useState, useEffect } from "react";
@@ -9,11 +10,17 @@ import {
   Dialog,
   Listbox,
 } from "@headlessui/react";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+// import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 function App() {
+  const [formData, setFormData] = useState({});
   const [users, setUsers] = useState();
   const [open, setOpen] = useState(false);
 
@@ -398,9 +405,9 @@ function App() {
                                 <Dialog.Panel className="relative transform  rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg h-screen w-screen		">
                                   <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                                     <div className="sm:flex sm:items-start">
-                                      <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                        <ExclamationTriangleIcon
-                                          className="h-6 w-6 text-red-600"
+                                      <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-indigo-200 sm:mx-0 sm:h-10 sm:w-10">
+                                        <CalendarDaysIcon
+                                          className="h-6 w-6 text-indigo-500"
                                           aria-hidden="true"
                                         />
                                       </div>
@@ -517,6 +524,37 @@ function App() {
                                               </>
                                             )}
                                           </Listbox>
+                                          <div className="mt-3">
+                                            <p className="block text-sm font-medium leading-6 text-gray-900 focus:outline-none focus:ring focus:ring-indigo-500">
+                                              Dia:
+                                            </p>
+                                            <LocalizationProvider
+                                              dateAdapter={AdapterDayjs}
+                                            >
+                                              <DatePicker
+                                                className="w-full focus:outline-none focus:ring focus:ring-indigo-500"
+                                                format="DD/MM/YYYY"
+                                                onChange={(e) =>
+                                                  setFormData({
+                                                    ...formData,
+                                                    day: e.format("DD/MM/YYYY"),
+                                                  })
+                                                }
+                                              />
+                                            </LocalizationProvider>
+                                          </div>
+                                        </div>
+                                        <div className="mt-2.5">
+                                        <p className="block text-sm font-medium leading-6 text-gray-900 focus:outline-none focus:ring focus:ring-indigo-500">
+                                          Horário:
+                                        </p>
+                                        <input
+                                          type="number"
+                                          name="price"
+                                          id="price"
+                                          className="block w-full rounded-md border-2 border-neutral-300 py-1.5 pl-7 pr-20 text-gray-900  placeholder:text-gray-400 sm:text-sm sm:leading-6  focus:outline-none focus:ring focus:ring-indigo-500"
+                                          placeholder="15:30"
+                                        />
                                         </div>
                                       </div>
                                     </div>
@@ -524,10 +562,10 @@ function App() {
                                   <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                                     <button
                                       type="button"
-                                      className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                                      className="inline-flex w-full justify-center rounded-md bg-emerald-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                                       onClick={() => setOpen(false)}
                                     >
-                                      Deactivate
+                                      Agendar
                                     </button>
                                     <button
                                       type="button"
@@ -535,7 +573,7 @@ function App() {
                                       onClick={() => setOpen(false)}
                                       ref={cancelButtonRef}
                                     >
-                                      Cancel
+                                      Cancelar
                                     </button>
                                   </div>
                                 </Dialog.Panel>

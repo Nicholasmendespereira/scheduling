@@ -1,6 +1,6 @@
 
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+import Manager from "./manager/index";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+ReactDOM.createRoot(document.getElementById("root")).render(<Manager />);

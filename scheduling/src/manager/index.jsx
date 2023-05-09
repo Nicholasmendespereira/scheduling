@@ -1,6 +1,6 @@
-import "./index.css";
+import "../index.css";
 import * as React from "react";
-import api from "../api/index";
+import api from "../../api/index";
 import moment from "moment";
 import { formatProcess } from "../../Utils/FormatProcess";
 import { Fragment, useRef, useState, useEffect } from "react";

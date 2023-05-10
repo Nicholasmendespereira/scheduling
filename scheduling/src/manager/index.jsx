@@ -20,7 +20,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 function App() {
   const [formData, setFormData] = useState({});
@@ -150,8 +150,8 @@ function App() {
   const people = [
     {
       imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-    }
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    },
   ];
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -695,7 +695,8 @@ function App() {
                               </Dialog.Title>
                               <div className="mt-2">
                                 <p className="text-sm text-gray-500">
-                                  Esse procedimento não poderá ser desfeito! <br />
+                                  Esse procedimento não poderá ser desfeito!{" "}
+                                  <br />
                                   ao prosseguir você concorda com o termo acima.
                                 </p>
                               </div>

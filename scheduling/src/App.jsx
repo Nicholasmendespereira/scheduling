@@ -1,15 +1,13 @@
 import { Routes, Route, Link } from 'react-router-dom';
 import Manager from './Manager/index'
+import Nav from './Nav/index.jsx'
 // import { Nav } from './Nav/index.jsx'
 
 export const App = () => {
     return (
         <>
-            <Link to='/'>TESTE</Link>
-            <Link to='/manager'>Gerenciador</Link>
-            <Link to='/home'>Home</Link>
-            <Link to='/contact'>Contato</Link>
-            <Link to='/info'>Informações</Link>
+           
+            <Nav/>
             <Routes>
                 <Route path='/' element={<h1>TESTE</h1>} />
                 <Route path='/manager' element={<Manager/>} />

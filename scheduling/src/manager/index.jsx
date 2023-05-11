@@ -731,4 +731,4 @@ function Manager() {
   );
 }
 
-export default manager;
+export default Manager;

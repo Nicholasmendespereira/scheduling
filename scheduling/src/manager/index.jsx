@@ -22,7 +22,7 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
-function App() {
+function Manager() {
   const [formData, setFormData] = useState({});
   const [users, setUsers] = useState();
   const [open, setOpen] = useState(false);
@@ -103,11 +103,9 @@ function App() {
         json: true,
       });
       LoadData();
-      const message = `https://api.whatsapp.com/send?phone=5534996442120&text=Olá! Gostaria de marcar um horário. Meu nome é: *${
-        formData?.name
-      }*,quero fazer: *${formatProcess(selected?.value)?.label}*, as: *${
-        formData?.hour
-      }*, no dia: *${formData?.day}*, telefone: ${formData?.email}!`;
+      const message = `https://api.whatsapp.com/send?phone=5534996442120&text=Olá! Gostaria de marcar um horário. Meu nome é: *${formData?.name
+        }*,quero fazer: *${formatProcess(selected?.value)?.label}*, as: *${formData?.hour
+        }*, no dia: *${formData?.day}*, telefone: ${formData?.email}!`;
       window.open(message, "_blank");
     } catch (e) {
       console.error(e);
@@ -733,4 +731,4 @@ function App() {
   );
 }
 
-export default App;
+export default manager;

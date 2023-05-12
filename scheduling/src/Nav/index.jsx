@@ -46,9 +46,6 @@ function Nav() {
     return (
         <>
             <Link to='/'>TESTE</Link>
-            <Link to='/manager'>Gerenciador</Link>
-            <Link to='/home'>Home</Link>
-            <Link to='/contact'>Contato</Link>
             <Link to='/info'>Informações</Link>
             {/* ///////////////////////////////////////////////////////////////// */}
             <header className="bg-gray-800">
@@ -121,15 +118,15 @@ function Nav() {
                             </Transition>
                         </Popover>
 
-                        <a href="#" className="text-sm font-semibold leading-6 text-slate-300">
-                            Features
-                        </a>
-                        <a href="#" className="text-sm font-semibold leading-6 text-slate-300">
-                            Marketplace
-                        </a>
-                        <a href="#" className="text-sm font-semibold leading-6 text-slate-300">
-                            Company
-                        </a>
+                        <Link to="/home" className="text-sm font-semibold leading-6 text-slate-300">
+                            Home
+                        </Link>
+                        <Link  to="/manager" className="text-sm font-semibold leading-6 text-slate-300">
+                             Gerenciador
+                        </Link>
+                        <Link to="/contact" className="text-sm font-semibold leading-6 text-slate-300">
+                            Contato
+                        </Link>
                     </Popover.Group>
                     {/* Profile dropdown */}
                     <div className="hidden flex justify-items-end lg:flex lg:flex-1 lg:justify-end">
@@ -234,18 +231,18 @@ function Nav() {
                                             </>
                                         )}
                                     </Disclosure>
-                                    <a
-                                        href="#"
+                                    <Link
+                                        to="/manager"
                                         className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                     >
-                                        Features
-                                    </a>
-                                    <a
-                                        href="#"
+                                        Gerenciador
+                                    </Link>
+                                    <Link
+                                        to="/home"
                                         className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                     >
-                                        Marketplace
-                                    </a>
+                                        Home
+                                    </Link>
                                     <a
                                         href="#"
                                         className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"

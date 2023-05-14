@@ -45,9 +45,6 @@ function Nav() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return (
         <>
-            <Link to='/'>TESTE</Link>
-            <Link to='/info'>Informações</Link>
-            {/* ///////////////////////////////////////////////////////////////// */}
             <header className="bg-gray-800">
                 <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
                     <div className="flex lg:flex-1">
@@ -142,11 +139,11 @@ function Nav() {
                             <div>
                                 <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                     <span className="sr-only">Open user menu</span>
-                                    <img
+                                    {/* <img
                                         className="h-8 w-8 rounded-full"
                                         src={user.imageUrl}
                                         alt=""
-                                    />
+                                    /> */}
                                 </Menu.Button>
                             </div>
                             <Transition

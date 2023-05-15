@@ -2,6 +2,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Manager from "./Manager/index";
 import Home from "./Home";
 import Nav from "./Nav/index.jsx";
+import Login from "./Login/index";
 // import { Nav } from './Nav/index.jsx'
 const PrivateRoute = ({ Item }) => {
   const Login = false;
@@ -15,6 +16,7 @@ export const App = () => {
       <Nav />
       <Routes>
         <Route path="/" element={<h1>TESTE</h1>} />
+        <Route path="/login" element={<Login/>} />
         <Route path="/manager" element={<PrivateRoute Item={Manager} />} />
         <Route path="/home" element={<Home />} />
         <Route path="/contact" element={<h1>CONTATO</h1>} />

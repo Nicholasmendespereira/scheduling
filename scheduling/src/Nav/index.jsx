@@ -45,9 +45,6 @@ function Nav() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return (
         <>
-            <Link to='/'>TESTE</Link>
-            <Link to='/info'>Informações</Link>
-            {/* ///////////////////////////////////////////////////////////////// */}
             <header className="bg-gray-800">
                 <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
                     <div className="flex lg:flex-1">
@@ -142,11 +139,11 @@ function Nav() {
                             <div>
                                 <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                     <span className="sr-only">Open user menu</span>
-                                    <img
+                                    {/* <img
                                         className="h-8 w-8 rounded-full"
                                         src={user.imageUrl}
                                         alt=""
-                                    />
+                                    /> */}
                                 </Menu.Button>
                             </div>
                             <Transition
@@ -177,9 +174,9 @@ function Nav() {
                                 </Menu.Items>
                             </Transition>
                         </Menu>
-                        <a href="#" className="text-sm font-semibold leading-6 text-slate-300">
+                        <Link to="/login" className="text-sm font-semibold leading-6 text-slate-300">
                             Log in <span aria-hidden="true">&rarr;</span>
-                        </a>
+                        </Link>
                     </div>
                 </nav>
                 <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -251,12 +248,12 @@ function Nav() {
                                     </a>
                                 </div>
                                 <div className="py-6">
-                                    <a
-                                        href="#"
+                                    <Link
+                                       to="/login"
                                         className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                     >
                                         Log in
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

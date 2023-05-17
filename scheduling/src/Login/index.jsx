@@ -52,7 +52,6 @@ function Login() {
               Email address {Login}
               
             </label>
-            <button onClick={toggleLogin}>Teste</button>
             <div className="mt-2">
               <input
                 id="email"

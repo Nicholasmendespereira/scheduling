@@ -1,9 +1,9 @@
 import api from "../../api/index";
 import { useState, useEffect, useContext } from "react";
-import { ThemeContext } from "../Context/LoginContext";
+import { LoginContext } from "../Context/LoginContext";
 function Login() {
   const [Userdata, setUserdata] = useState({});
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { Login, toggleLogin } = useContext(LoginContext);
 
   const HandleLogin = async () => {
     try {
@@ -20,6 +20,7 @@ function Login() {
         json: true,
       });
       alert("Login feito com sucesso!");
+      toggleLogin()
       console.log({ Userdata });
     } catch (e) {
       alert("Error: Usuário não cadastrado!");
@@ -48,8 +49,10 @@ function Login() {
               htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Email address {theme}
+              Email address {Login}
+              
             </label>
+            <button onClick={toggleLogin}>Teste</button>
             <div className="mt-2">
               <input
                 id="email"

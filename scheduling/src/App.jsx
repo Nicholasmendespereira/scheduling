@@ -1,11 +1,15 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Manager from "./Manager/index";
 import Home from "./Home";
 import Nav from "./Nav/index.jsx";
 import Login from "./Login/index";
+import {  useContext } from "react";
+import { LoginContext } from "./Context/LoginContext";
 // import { Nav } from './Nav/index.jsx'
+
 const PrivateRoute = ({ Item }) => {
-  const Login = false;
+  const { Login } = useContext(LoginContext);
+  // const Login = false;
 
   return Login > 0 ? <Item /> : <Home />;
 };

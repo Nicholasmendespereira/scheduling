@@ -8,8 +8,8 @@ function Home() {
   const stats = [
     { name: "Anos de experiência ", value: "12+" },
     { name: "Clientes recorrentes", value: "300+" },
-    { name: "", value: "40" },
-    { name: "Paid time off", value: "Unlimited" },
+    { name: "Clientes atendidos", value: "2000+" },
+    { name: "Procedimentos e produtos", value: "Alta qualidade" },
   ];
   return (
     <>

@@ -1,14 +1,14 @@
 function Home() {
   const links = [
-    { name: "Open roles", href: "#" },
-    { name: "Internship program", href: "#" },
-    { name: "Our values", href: "#" },
-    { name: "Meet our leadership", href: "#" },
+    { name: "Relatos", href: "#" },
+    { name: "Procedimentos", href: "#" },
+    { name: "Produtos", href: "#" },
+    { name: "Equipe", href: "#" },
   ];
   const stats = [
-    { name: "Offices worldwide", value: "12" },
-    { name: "Full-time colleagues", value: "300+" },
-    { name: "Hours per week", value: "40" },
+    { name: "Anos de experiência ", value: "12+" },
+    { name: "Clientes recorrentes", value: "300+" },
+    { name: "", value: "40" },
     { name: "Paid time off", value: "Unlimited" },
   ];
   return (
@@ -46,13 +46,15 @@ function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-              Work with us
+              Veja nosso trabalho
             </h2>
             <p className="mt-6 text-lg leading-8 text-gray-300">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-              lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-              fugiat aliqua.
+              Somos um salão de beleza que atua no mercado desde do ano <br /> de 2005,
+              Sim! temos experiência de sobra. <br />
+              Atuamos atendendo público Masculino e Feminino
             </p>
+            <h3 className="text-xl font-bold tracking-tight text-white mt-3 sm:text-2xl">
+              Veja abaixo um pouco sobre nós</h3>
           </div>
           <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">

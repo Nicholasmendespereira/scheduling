@@ -100,7 +100,6 @@ function Login() {
                   />
                 </div>
               </div> */}
-              {console.log({ Userdata })}
               <div>
                 <button
                   onClick={HandleLogin}
@@ -112,7 +111,7 @@ function Login() {
               {/* </form> */}
 
               <p className="mt-10 text-center text-sm text-gray-500">
-                Não está cadastrada?{" "}
+                Não está cadastrad(a)?{" "}
                 <a
                   href="#"
                   className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"

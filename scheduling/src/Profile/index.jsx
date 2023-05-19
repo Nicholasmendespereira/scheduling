@@ -37,12 +37,13 @@ function Profile() {
                     ))}
 
                 </div>
+                <div>
                 <p className="mt-2 text-lg leading-8 text-gray-600">
                     Ultima visita:
                 </p>
-                <ul role="list" className="divide-y divide-gray-100">
+                <ul role="list" className="divide-y divide-gray-100 mt-5">
                     {lastVisit.map((visit) => (
-                        <li key={visit.email} className="flex justify-between gap-x-6 py-5 border">
+                        <li key={visit.email} className="flex justify-between gap-x-6 py-5 border rounded-full pl-3">
                             <div className="flex gap-x-4">
                                 <div className="min-w-0 flex-auto">
                                     <p className="text-sm font-semibold leading-6 text-gray-900">{visit.process}</p>
@@ -52,6 +53,7 @@ function Profile() {
                         </li>
                     ))}
                 </ul>
+                </div>
             </div>
         </div>
     );

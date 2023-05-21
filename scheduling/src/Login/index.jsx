@@ -4,7 +4,8 @@ import { LoginContext } from "../Context/LoginContext";
 import { Navigate } from "react-router-dom";
 function Login() {
   const [Userdata, setUserdata] = useState({});
-  const { Login, toggleLogin } = useContext(LoginContext);
+  const { Login, toggleLogin, toggleProfile } =
+    useContext(LoginContext);
 
   const HandleLogin = async () => {
     try {
@@ -22,13 +23,14 @@ function Login() {
       });
       alert("Login feito com sucesso!");
       toggleLogin();
+      toggleProfile(resp.data);
       console.log({ Userdata });
     } catch (e) {
       alert("Error: Usuário não cadastrado!");
       console.error(e);
     }
   };
-
+  
   return (
     <>
       {Login === false ? (

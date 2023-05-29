@@ -6,8 +6,8 @@ export const ThemeProvider = ({ children }) => {
   const [Login, setLogin] = useState(false);
   const [profile, setProfile] = useState({});
 
-  const toggleLogin = () => {
-    setLogin(true);
+  const toggleLogin = (Logged) => {
+    setLogin(Logged);
   };
   const toggleProfile = (profileData) => {
     setProfile(profileData);

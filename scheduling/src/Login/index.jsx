@@ -1,7 +1,7 @@
 import api from "../../api/index";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { LoginContext } from "../Context/LoginContext";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 function Login() {
   const [Userdata, setUserdata] = useState({});
   const { Login, toggleLogin, toggleProfile } =
@@ -22,7 +22,7 @@ function Login() {
         json: true,
       });
       alert("Login feito com sucesso!");
-      toggleLogin();
+      toggleLogin(true);
       toggleProfile(resp.data);
       console.log({ Userdata });
     } catch (e) {
@@ -80,12 +80,12 @@ function Login() {
                     Senha:
                   </label>
                   <div className="text-sm">
-                    <a
-                      href="#"
+                    <Link
+                      to="/resetpassword"
                       className="font-semibold text-indigo-600 hover:text-indigo-500"
                     >
-                      Forgot password?
-                    </a>
+                      esqueceu a senha?
+                    </Link>
                   </div>
                 </div>
                 <div className="my-3">
@@ -107,7 +107,7 @@ function Login() {
                   onClick={HandleLogin}
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Sign in
+                  Entrar
                 </button>
               </div>
               {/* </form> */}

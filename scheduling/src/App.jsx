@@ -3,6 +3,7 @@ import Manager from "./Manager/index";
 import Home from "./Home";
 import Nav from "./Nav/index.jsx";
 import Login from "./Login/index";
+import ResetPassword from "./ResetPassword/index";
 import Profile from "./Profile/index";
 import Contact from "./Contact/index";
 import { useContext } from "react";
@@ -22,6 +23,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/manager" element={<PrivateRoute Item={Manager} />} />
         <Route path="/home" element={<Home />} />

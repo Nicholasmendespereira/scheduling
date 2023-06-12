@@ -1,5 +1,7 @@
+
+import { LoginContext } from "../Context/LoginContext";
 import { Link } from 'react-router-dom'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useContext } from 'react'
 import { Dialog, Disclosure, Popover, Transition, Menu } from '@headlessui/react'
 import {
     ArrowPathIcon,
@@ -39,9 +41,9 @@ const user = {
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
-
 function Nav() {
-
+    const { Login } = useContext(LoginContext);
+    console.log({ Login });
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return (
         <>
@@ -118,8 +120,8 @@ function Nav() {
                         <Link to="/home" className="text-sm font-semibold leading-6 text-slate-300">
                             Home
                         </Link>
-                        <Link  to="/manager" className="text-sm font-semibold leading-6 text-slate-300">
-                             Gerenciador
+                        <Link to="/manager" className="text-sm font-semibold leading-6 text-slate-300">
+                            Gerenciador
                         </Link>
                         <Link to="/contact" className="text-sm font-semibold leading-6 text-slate-300">
                             Contato
@@ -174,9 +176,13 @@ function Nav() {
                                 </Menu.Items>
                             </Transition>
                         </Menu>
-                        <Link to="/login" className="text-sm font-semibold leading-6 text-slate-300">
-                            Log in <span aria-hidden="true">&rarr;</span>
-                        </Link>
+                        {!Login ?
+                            <Link to="/login" className="text-sm font-semibold leading-6 text-slate-300">
+                                Log in <span aria-hidden="true">&rarr;</span>
+                            </Link>
+                            : <Link to="/login" className="text-sm font-semibold leading-6 text-slate-300">
+                                Log out <span aria-hidden="true">&rarr;</span>
+                            </Link>}
                     </div>
                 </nav>
                 <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -249,7 +255,7 @@ function Nav() {
                                 </div>
                                 <div className="py-6">
                                     <Link
-                                       to="/login"
+                                        to="/login"
                                         className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                     >
                                         Log in

@@ -1,10 +1,156 @@
-
+import api from "../../api/index";
+import { useState, useContext } from "react";
+import { LoginContext } from "../Context/LoginContext";
+import { Navigate, Link } from "react-router-dom";
 
 function NewUser() {
-    return(
+
+  const [Userdata, setUserdata] = useState({});
+  const { Login, toggleLogin, toggleProfile } = useContext(LoginContext);
+
+  const HandleLogin = async () => {
+    try {
+      const resp = await api({
+        method: "POST",
+        url: "/new-user",
+        data: {
+          name: String(Userdata?.name),
+          senha: String(Userdata?.senha),
+          email: String(Userdata?.email)
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+        json: true,
+      });
+      alert("Cadastro realizado com sucesso!");
+      toggleLogin(true);
+      toggleProfile(resp.data);
+      console.log({ Userdata });
+    } catch (e) {
+      alert("Error: Usuário não cadastrado!");
+      console.error(e);
+    }
+  };
+
+  return (
+    <>
+      {Login === false ? (
         <>
-            <h1>New User</h1>
+          <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+            <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+              <img
+                className="mx-auto h-10 w-auto"
+                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                alt="Your Company"
+              />
+              <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                Cadastre-se
+              </h2>
+              <div className="flex justify-center ">
+              <small className="text-center">É rápido, e fácil</small>
+
+              </div>
+            </div>
+
+            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+              {/* <form className="space-y-6" action="#" method="POST"> */}
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Nome:
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    onChange={(e) => {
+                      setUserdata({ ...Userdata, name: e.target.value });
+                    }}
+                    autoComplete="name"
+                    required
+                    className="mb-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Senha:
+                  </label>
+                </div>
+                <div className="my-3">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    onChange={(e) => {
+                      setUserdata({ ...Userdata, senha: e.target.value });
+                    }}
+                    required
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Telefone:
+                  </label>
+                </div>
+                <div className="my-3">
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="phone"
+                    autoComplete="current-password"
+                    onChange={(e) => {
+                      setUserdata({ ...Userdata, email: e.target.value });
+                    }}
+                    required
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+
+
+              <div>
+                <button
+                  onClick={HandleLogin}
+                  className="mt-5 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Cadastrar
+                </button>
+              </div>
+              {/* </form> */}
+
+              <p className="mt-10 text-center text-sm text-gray-500">
+                Já possui cadastro(a)?{" "}
+                <Link
+                  to="/Login"
+                  className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+                >
+                  Click aqui!
+                </Link>
+              </p>
+            </div>
+          </div>
         </>
-    );
+      ) : (
+        <Navigate to="/Login" />
+      )}
+    </>
+  );
 }
 export default NewUser;

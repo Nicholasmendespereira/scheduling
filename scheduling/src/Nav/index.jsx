@@ -42,9 +42,13 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 function Nav() {
-    const { Login } = useContext(LoginContext);
+    const { Login, toggleLogin } = useContext(LoginContext);
     console.log({ Login });
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+    const handleLogOut = () => {
+        alert('teste')
+    }
     return (
         <>
             <header className="bg-gray-800">
@@ -180,9 +184,9 @@ function Nav() {
                             <Link to="/login" className="text-sm font-semibold leading-6 text-slate-300">
                                 Log in <span aria-hidden="true">&rarr;</span>
                             </Link>
-                            : <Link to="/login" className="text-sm font-semibold leading-6 text-slate-300">
+                            : <button onClick={handleLogOut} className="text-sm font-semibold leading-6 text-slate-300">
                                 Log out <span aria-hidden="true">&rarr;</span>
-                            </Link>}
+                            </button>}
                     </div>
                 </nav>
                 <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>

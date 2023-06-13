@@ -129,13 +129,13 @@ function ResetPassword() {
                         {/* </form> */}
 
                         <p className="mt-10 text-center text-sm text-gray-500">
-                            Não está cadastrad(a)?{" "}
-                            <a
-                                href="#"
+                            Já está cadastrad(a)?{" "}
+                            <Link
+                                to="/login"
                                 className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
                             >
                                 Click aqui!
-                            </a>
+                            </Link>
                         </p>
                     </div>
                 </div>

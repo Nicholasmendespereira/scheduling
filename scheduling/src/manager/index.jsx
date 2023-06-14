@@ -17,8 +17,10 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { ExclamationTriangleIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
-
+import {
+  ExclamationTriangleIcon,
+  PencilSquareIcon,
+} from "@heroicons/react/24/outline";
 
 function Manager() {
   const [formData, setFormData] = useState({});
@@ -27,6 +29,7 @@ function Manager() {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [usersDelete, setUsersDelete] = useState();
+  const [usersEdit, setUsersEdit] = useState();
   const cancelDeleteButtonRef = useRef(null);
   const cancelEditButtonRef = useRef(null);
   const cancelButtonRef = useRef(null);
@@ -103,9 +106,11 @@ function Manager() {
         json: true,
       });
       LoadData();
-      const message = `https://api.whatsapp.com/send?phone=5534996442120&text=Olá! Gostaria de marcar um horário. Meu nome é: *${formData?.name
-        }*,quero fazer: *${formatProcess(selected?.value)?.label}*, as: *${formData?.hour
-        }*, no dia: *${formData?.day}*, telefone: ${formData?.email}!`;
+      const message = `https://api.whatsapp.com/send?phone=5534996442120&text=Olá! Gostaria de marcar um horário. Meu nome é: *${
+        formData?.name
+      }*,quero fazer: *${formatProcess(selected?.value)?.label}*, as: *${
+        formData?.hour
+      }*, no dia: *${formData?.day}*, telefone: ${formData?.email}!`;
       window.open(message, "_blank");
     } catch (e) {
       console.error(e);
@@ -129,15 +134,20 @@ function Manager() {
   };
   const handleEditScheduling = async () => {
     try {
-      const resp = awiat api({
+      setOpenEdit(true);
+      const resp = await api({
         method: "PATCH",
         url: "/update-user",
-        data: {
-          
-        }
-      })
+        data: {},
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setOpenEdit(false);
+    } catch (e) {
+      console.error(e);
     }
-  }
+  };
   const people = [
     {
       imageUrl:
@@ -203,7 +213,7 @@ function Manager() {
                         </p>
                         <p className="mt-1 text-xs leading-5 text-gray-500 flex items-center	">
                           {moment(person.created_at).format("DD/MM/YYYY")}
-                          <div className=" flex rounded-full bg-red-200 h-6 w-6 ml-1.5 hover:text-white-300 active:bg-red-700 cursor-pointer">                            
+                          <div className=" flex rounded-full bg-red-200 h-6 w-6 ml-1.5 hover:text-white-300 active:bg-red-700 cursor-pointer">
                             <TrashIcon
                               className="h-4 w-4 text-red-600 m-1"
                               onClick={() => {
@@ -212,15 +222,15 @@ function Manager() {
                               }}
                             />
                           </div>
-                           <div className="cursor-pointer">
-                           <PencilSquareIcon
+                          <div className="cursor-pointer">
+                            <PencilSquareIcon
                               className="h-4 w-4 text-yellow-600 m-1"
                               onClick={() => {
-                                setOpenDelete(true);
-                                setUsersDelete(person?.id);
+                                setOpenEdit(true);
+                                setUsersEdit(person?.id);
                               }}
                             />
-                           </div>
+                          </div>
                         </p>
                       </div>
                       <Transition.Root show={open} as={Fragment}>
@@ -559,85 +569,104 @@ function Manager() {
                 </div>
               </Dialog>
             </Transition.Root>
-            <Transition.Root show={openEdit} as={Fragment}>
-              <Dialog
-                as="div"
-                className="relative z-10"
-                initialFocus={cancelEditButtonRef}
-                onClose={setOpenEdit}
-              >
-                <Transition.Child
-                  as={Fragment}
-                  enter="ease-out duration-300"
-                  enterFrom="opacity-0"
-                  enterTo="opacity-100"
-                  leave="ease-in duration-200"
-                  leaveFrom="opacity-100"
-                  leaveTo="opacity-0"
+            <div>
+              <Transition.Root show={openEdit} as={Fragment}>
+                <Dialog
+                  as="div"
+                  className="relative z-10"
+                  initialFocus={cancelEditButtonRef}
+                  onClose={setOpenEdit}
                 >
-                  <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-                </Transition.Child>
+                  <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                  </Transition.Child>
 
-                <div className="fixed inset-0 z-10 overflow-y-auto">
-                  <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                    <Transition.Child
-                      as={Fragment}
-                      enter="ease-out duration-300"
-                      enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                      enterTo="opacity-100 translate-y-0 sm:scale-100"
-                      leave="ease-in duration-200"
-                      leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                      leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    >
-                      <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                        <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                          <div className="sm:flex sm:items-start">
-                            <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                              <PencilSquareIcon 
-                                className="h-6 w-6 text-red-600"
-                                aria-hidden="true"
-                              />
-                            </div>
-                            <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                              <Dialog.Title
-                                as="h3"
-                                className="text-base font-semibold leading-6 text-gray-900"
-                              >
-                                Deseja excluir esse Agendamento?
-                              </Dialog.Title>
-                              <div className="mt-2">
-                                <p className="text-sm text-gray-500">
-                                  Esse procedimento não poderá ser desfeito!{" "}
-                                  <br />
-                                  ao prosseguir você concorda com o termo acima.
-                                </p>
+                  <div className="fixed inset-0 z-10 overflow-y-auto">
+                    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                      <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        enterTo="opacity-100 translate-y-0 sm:scale-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                        leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                      >
+                        <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                          <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                            <div className="sm:flex sm:items-start">
+                              <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-yellow-100 sm:mx-0 sm:h-10 sm:w-10">
+                                <PencilSquareIcon
+                                  className="h-6 w-6 text-yellow-700"
+                                  aria-hidden="true"
+                                />
+                              </div>
+                              <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                <Dialog.Title
+                                  as="h3"
+                                  className="text-base font-semibold leading-6 text-gray-900"
+                                >
+                                  Deseja editar esse Agendamento?
+                                </Dialog.Title>
+                                <div className="mt-2">
+                                  <p className="text-sm text-gray-500">
+                                    edite os campos abaixo! <br />e confirme no
+                                    botão de concluir.
+                                  </p>
+                                </div>
+                                <div className="my-3">
+                                  <p className="block text-sm font-medium leading-6 text-gray-900 focus:outline-none focus:ring focus:ring-indigo-500">
+                                    Nome:
+                                  </p>
+                                  <input
+                                    type="text"
+                                    name="price"
+                                    id="price"
+                                    className="block w-full rounded-md border-2 border-neutral-300 py-1.5 pl-7 pr-20 text-gray-900  placeholder:text-gray-400 sm:text-sm sm:leading-6  focus:outline-none focus:ring focus:ring-indigo-500"
+                                    placeholder="Mária de fatima"
+                                    onChange={(e) =>
+                                      setFormData({
+                                        ...formData,
+                                        name: e.target.value,
+                                      })
+                                    }
+                                  />
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                          <button
-                            type="button"
-                            className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                            onClick={() => DeleteSvheduling()}
-                          >
-                            Excluir
-                          </button>
-                          <button
-                            type="button"
-                            className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                            onClick={() => setOpenDelete(false)}
-                            ref={cancelDeleteButtonRef}
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      </Dialog.Panel>
-                    </Transition.Child>
+                          <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                            <button
+                              type="button"
+                              className="inline-flex w-full justify-center rounded-md bg-yellow-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yellow-400 sm:ml-3 sm:w-auto"
+                              onClick={() => handleEditScheduling}
+                            >
+                              Editar
+                            </button>
+                            <button
+                              type="button"
+                              className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                              onClick={() => setOpenEdit(false)}
+                              ref={cancelEditButtonRef}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </Dialog.Panel>
+                      </Transition.Child>
+                    </div>
                   </div>
-                </div>
-              </Dialog>
-            </Transition.Root>
+                </Dialog>
+              </Transition.Root>
+            </div>
           </main>
         </div>
       </>
